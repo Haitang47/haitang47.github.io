@@ -120,3 +120,11 @@ body{font-family:var(--font-sans);line-height:1.7}
   .academic-top nav a{font-size:12px}
   .paper-title{font-size:18px}
 }
+
+/* Large square portrait: a 760px crop at (180, 520), keeping the original photograph unchanged. */
+.avatar.avatar-photo{display:block;position:relative;overflow:hidden;width:100%;height:auto;aspect-ratio:1;border:0;border-radius:10px;flex-shrink:0;margin:0 0 28px;box-shadow:none}
+.avatar-photo>img{position:absolute;display:block;max-width:none;width:142.105263%;height:189.473684%;left:-23.684211%;top:-68.421053%;object-fit:fill}
+@media screen and (min-width:1101px){.academic-shell{grid-template-columns:300px minmax(0,1fr)}}
+@media screen and (min-width:961px) and (max-width:1100px){.academic-shell{grid-template-columns:250px minmax(0,1fr)}}
+@media screen and (min-width:651px) and (max-width:960px){.profile-identity{grid-template-columns:260px minmax(0,1fr);gap:30px}.avatar.avatar-photo{margin:0}.profile-location{margin-left:290px}}
+@media screen and (max-width:650px){.profile-identity{grid-template-columns:minmax(0,1fr);gap:0}.avatar.avatar-photo{width:min(100%,300px);margin:0 0 24px}.profile-location{margin-left:0}}
