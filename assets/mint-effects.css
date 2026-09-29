@@ -29,7 +29,7 @@ body {
   transform-origin: 0 0;
   transition: opacity .22s ease;
 }
-.profile-contact a { transition: color .2s ease; }
+.profile-contact :is(a, .email-copy) { transition: color .2s ease; }
 .profile-contact svg:last-child { transition: transform .4s var(--motion-ease), color .25s ease; }
 .paper-title a { transition: color .25s ease; }
 .publication-figure {
@@ -54,7 +54,7 @@ body {
 .fx-motion[aria-pressed="false"]::before { background: #a4aba7; }
 .effects-off .fx-reveal, .effects-off .fx-nav-indicator { transition: none; }
 .effects-off .academic-top, .effects-off .academic-top nav a,
-.effects-off .publication-figure, .effects-off .profile-contact a,
+.effects-off .publication-figure, .effects-off .profile-contact :is(a, .email-copy),
 .effects-off .profile-contact svg, .effects-off .paper-title a { transition: none; }
 /* One image travels between its thumbnail and the native modal's image area. */
 .figure-dialog {
@@ -105,7 +105,7 @@ body {
     transform: translateY(-2px); border-color: #cbded2;
     box-shadow: 0 5px 15px #1a35220c;
   }
-  .effects-on .profile-contact a:hover svg:last-child {
+  .effects-on .profile-contact :is(a, .email-copy):hover svg:last-child {
     transform: translate(2px, -2px); color: #457e63;
   }
 }
@@ -216,11 +216,11 @@ body {
   box-shadow: 0 0 0 1px #cfe4d8, 0 8px 28px #46745b0c;
   transition: transform .65s var(--motion-ease), box-shadow .65s var(--motion-ease);
 }
-.profile-contact a {
+.profile-contact :is(a, .email-copy) {
   position: relative; isolation: isolate;
   transition: color .25s ease, transform .45s var(--motion-ease);
 }
-.profile-contact a::before {
+.profile-contact :is(a, .email-copy)::before {
   content: ""; position: absolute; inset: 1px -9px; z-index: -1; pointer-events: none;
   border: 1px solid #dbece1; border-radius: 9px;
   background: linear-gradient(120deg, #fffffff2, #edf8f1c9);
@@ -253,8 +253,8 @@ body {
     transform: translateY(-3px) scale(1.025);
     box-shadow: 0 0 0 1px #a2cbb6, 0 0 0 7px #e0f2e999, 0 12px 32px #39654a1a;
   }
-  .effects-on .profile-contact a:hover { color: #245b40; transform: translateX(3px); }
-  .effects-on .profile-contact a:hover::before { opacity: 1; transform: scale(1); }
+  .effects-on .profile-contact :is(a, .email-copy):hover { color: #245b40; transform: translateX(3px); }
+  .effects-on .profile-contact :is(a, .email-copy):hover::before { opacity: 1; transform: scale(1); }
   .effects-on .publication-figure:hover {
     transform: translateY(-3px); border-color: #b9d8c6;
     box-shadow: 0 9px 28px #21473213, 0 1px 4px #2147320a;
@@ -267,8 +267,8 @@ body {
     border-color: #a9ceba; box-shadow: 0 0 0 5px #e3f3eb, 0 6px 20px #2d624714;
   }
 }
-.profile-contact a:focus-visible::before, .paper-links > :focus-visible::before { opacity: 1; transform: none; }
-.effects-on .profile-contact a:active, .effects-on .paper-links > :active { transform: translateY(1px); }
+.profile-contact :is(a, .email-copy):focus-visible::before, .paper-links > :focus-visible::before { opacity: 1; transform: none; }
+.effects-on .profile-contact :is(a, .email-copy):active, .effects-on .paper-links > :active { transform: translateY(1px); }
 @keyframes fx-surface-glint {
   0% { opacity: 0; transform: translateX(-105%); }
   15% { opacity: .7; }
@@ -276,13 +276,13 @@ body {
   100% { opacity: 0; transform: translateX(105%); }
 }
 .effects-off .fx-enter { animation: none !important; }
-.effects-off .avatar, .effects-off .profile-contact a::before,
+.effects-off .avatar, .effects-off .profile-contact :is(a, .email-copy)::before,
 .effects-off .paper-links > a, .effects-off .paper-links > button,
 .effects-off .paper-links > a::before, .effects-off .paper-links > button::before,
 .effects-off .institution-monogram, .effects-off .timeline-node { transition: none; }
 @media (prefers-reduced-motion: reduce) {
   .publication-figure > a::after { animation: none !important; opacity: 0 !important; }
-  .profile-contact a::before, .paper-links > a::before, .paper-links > button::before { transition: none !important; }
+  .profile-contact :is(a, .email-copy)::before, .paper-links > a::before, .paper-links > button::before { transition: none !important; }
 }
 @media print {
   .fx-reading-progress, .publication-figure > a::after { display: none; }

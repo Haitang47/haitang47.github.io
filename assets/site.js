@@ -12,6 +12,29 @@
     toast.textContent = message; toast.classList.add('visible');
     clearTimeout(toastTimer); toastTimer = setTimeout(() => toast.classList.remove('visible'), 2600);
   }
+  document.querySelectorAll('[data-copy-email]').forEach(button => button.addEventListener('click', async () => {
+    const address = button.dataset.copyEmail;
+    let copied = false;
+    try {
+      if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(address);
+        copied = true;
+      }
+    } catch {}
+    if (!copied) {
+      const input = document.createElement('textarea');
+      input.value = address;
+      input.readOnly = true;
+      input.style.cssText = 'position:fixed;top:0;left:-9999px';
+      document.body.append(input);
+      input.select();
+      try { copied = document.execCommand('copy'); } catch {}
+      input.remove();
+    }
+    if (copied) notify('Email copied');
+    else window.prompt('Copy this email address:', address);
+    button.focus({preventScroll:true});
+  }));
   function filter() {
     const query = (search?.value || '').trim().toLowerCase();
     let count = 0;
