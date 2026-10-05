@@ -35,9 +35,9 @@
 .visitor-map-widget { min-width: 0; width: 100%; }
 .visitor-map-art { pointer-events: none; user-select: none; }
 .visitor-map-globe { display: block; width: 100%; height: auto; max-height: 265px; }
-.visitor-map-widget { overflow: auto; text-align: center; min-height: 220px; }
-.visitor-map-widget img,
-.visitor-map-widget svg { max-width: 100%; }
+.visitor-map-widget { overflow: hidden; text-align: center; min-height: 220px; max-width: 340px; margin-inline: auto; }
+.visitor-map-widget > img,
+.visitor-map-widget > svg { max-width: 100%; }
 .visitor-map-widget noscript { display: block; margin: 25px 0; color: #6a7d71; font-size: 14px; }
 .visitor-map-section[data-visitor-state="connected"] .visitor-map-panel {
   grid-template-columns: minmax(180px, .8fr) minmax(0, 1.4fr);
@@ -48,8 +48,8 @@
     grid-template-columns: 1fr;
     gap: 5px;
   }
-  .visitor-map-art,
-  .visitor-map-widget { max-width: 500px; margin-inline: auto; }
+  .visitor-map-art { max-width: 500px; margin-inline: auto; }
+  .visitor-map-widget { max-width: 340px; margin-inline: auto; }
   .visitor-map-description { max-width: 440px; }
 }
 @media (max-width: 650px) {
