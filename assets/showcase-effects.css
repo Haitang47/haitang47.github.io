@@ -1,0 +1,160 @@
+/* Decorative enhancement: content, profile geometry, and native links stay intact. */
+.showcase-ambient,
+.showcase-pointer-halo {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  user-select: none;
+  overflow: hidden;
+}
+.showcase-ambient {
+  opacity: .82;
+  background-image: linear-gradient(#70ad8810 1px, transparent 1px),
+    linear-gradient(90deg, #70ad8810 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: linear-gradient(transparent, #0009 13%, #0006 80%, transparent);
+}
+.showcase-ambient::before,
+.showcase-ambient::after {
+  content: "";
+  position: absolute;
+  width: min(66vw, 880px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, #9fe2c456, #c6ede532 35%, transparent 68%);
+  transform: translate3d(0, 0, 0);
+}
+.showcase-ambient::before { left: 52%; top: -28%; }
+.showcase-ambient::after {
+  left: -20%; bottom: -38%;
+  background: radial-gradient(circle, #a9d9d950, #bde7ca35 35%, transparent 68%);
+}
+.effects-on .showcase-ambient::before { animation: showcase-orbit-a 23s ease-in-out infinite alternate; }
+.effects-on .showcase-ambient::after { animation: showcase-orbit-b 29s ease-in-out infinite alternate; }
+body.showcase-ready .academic-shell { position: relative; z-index: 1; }
+.showcase-pointer-halo {
+  inset: auto;
+  top: 0; left: 0;
+  width: 440px; height: 440px;
+  border-radius: 50%;
+  opacity: 0;
+  background: radial-gradient(circle, #82d6ad34, #b6e4d319 40%, transparent 69%);
+}
+.effects-on.showcase-pointer-active .showcase-pointer-halo { opacity: 1; }
+
+/* The spotlight is behind the existing content and cannot intercept a link. */
+.showcase-card { position: relative; isolation: isolate; border-radius: 14px; }
+.showcase-card::before,
+.showcase-card::after {
+  content: "";
+  position: absolute;
+  inset: -13px -16px;
+  z-index: -1;
+  border-radius: 18px;
+  pointer-events: none;
+  opacity: 0;
+}
+.showcase-card::before {
+  background: radial-gradient(620px circle at var(--showcase-x, 50%) var(--showcase-y, 30%),
+    #cceedd8c, #eff9f349 44%, transparent 76%);
+  box-shadow: 0 16px 42px #3975550b;
+}
+.showcase-card::after {
+  border: 1px solid #add7bd;
+  mask-image: radial-gradient(380px circle at var(--showcase-x, 50%) var(--showcase-y, 30%), #000, transparent 82%);
+}
+.effects-on .showcase-card::before,
+.effects-on .showcase-card::after { transition: opacity .28s ease; }
+.effects-on .showcase-card.showcase-pointer-card::before,
+.effects-on .showcase-card.showcase-pointer-card::after,
+.effects-on .showcase-card:focus-within::before,
+.effects-on .showcase-card:focus-within::after { opacity: 1; }
+
+/* Only image surfaces tilt; the profile and reading text never move. */
+@media (min-width: 961px) and (hover: hover) and (pointer: fine) {
+  body.effects-on .academic-content .showcase-media.showcase-pointer-media {
+    transform: perspective(950px) rotateX(var(--showcase-rx, 0deg)) rotateY(var(--showcase-ry, 0deg)) translateY(-3px);
+    transition: transform .2s ease-out, box-shadow .35s ease, border-color .35s ease;
+    border-color: #8fc5a7;
+    box-shadow: 0 12px 30px #285e3e1c, 0 0 0 1px #b7dcc799;
+  }
+  body.effects-on .academic-content .competition-photo.showcase-pointer-media {
+    box-shadow: none;
+  }
+  .effects-on .competition-photo.showcase-pointer-media > a {
+    box-shadow: 0 12px 30px #285e3e22, 0 0 0 1px #a8d4bc;
+  }
+}
+
+/* Each heading receives a single light sweep when it enters the viewport. */
+.showcase-heading { position: relative; isolation: isolate; }
+.showcase-heading::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: -12px; bottom: -13px;
+  width: min(100%, 330px); height: 60px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, #bce9d35e, transparent 71%);
+  pointer-events: none;
+  opacity: .72;
+}
+.effects-on .showcase-heading.showcase-entered::before {
+  animation: showcase-heading-arrive 1.15s cubic-bezier(.2, .8, .2, 1) both;
+}
+.effects-on .competition-award {
+  background-image: linear-gradient(115deg, #edf7f0 20%, #daf2e580 50%, #edf7f0 80%);
+  box-shadow: inset 0 1px 0 #fff9, 0 3px 10px #275a3c08;
+}
+
+@keyframes showcase-orbit-a {
+  to { transform: translate3d(-12vw, 12vh, 0) scale(1.12); }
+}
+@keyframes showcase-orbit-b {
+  to { transform: translate3d(10vw, -10vh, 0) scale(.92); }
+}
+@keyframes showcase-heading-arrive {
+  0% { opacity: 0; transform: translateX(-18px) scaleX(.55); }
+  55% { opacity: 1; }
+  100% { opacity: .72; transform: none; }
+}
+
+body.showcase-paused .showcase-ambient::before,
+body.showcase-paused .showcase-ambient::after,
+body.showcase-paused .showcase-heading::before { animation-play-state: paused; }
+.effects-off .showcase-ambient::before,
+.effects-off .showcase-ambient::after,
+.effects-off .showcase-heading::before { animation: none; transform: none; }
+.effects-off .showcase-card::before,
+.effects-off .showcase-card::after,
+.effects-off .showcase-media,
+.effects-off .showcase-media > a { transition: none; }
+.effects-off .showcase-pointer-halo { opacity: 0; }
+.effects-off .showcase-card::before,
+.effects-off .showcase-card::after { opacity: 0; }
+@media (max-width: 960px), (hover: none), (pointer: coarse) {
+  .showcase-pointer-halo { display: none; }
+  .showcase-ambient { opacity: .55; background-size: 38px 38px; }
+  .showcase-ambient::before,
+  .showcase-ambient::after { width: 100vw; }
+  .showcase-card::before,
+  .showcase-card::after { inset: -9px -10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .showcase-ambient::before,
+  .showcase-ambient::after,
+  .showcase-heading::before { animation: none !important; transform: none !important; }
+  .showcase-pointer-halo { display: none; }
+  .showcase-card::before,
+  .showcase-card::after,
+  .showcase-media { transition: none !important; }
+}
+@media (forced-colors: active), print {
+  .showcase-ambient,
+  .showcase-pointer-halo,
+  .showcase-card::before,
+  .showcase-card::after,
+  .showcase-heading::before { display: none !important; }
+  .showcase-media { transform: none !important; box-shadow: none !important; }
+}

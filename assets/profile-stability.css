@@ -1,0 +1,30 @@
+/* Keep the identity readable while the rest of the page responds to motion. */
+.academic-profile .profile-name h1,
+.academic-profile .profile-role,
+.academic-profile .profile-program,
+.academic-profile .profile-university,
+.academic-profile .profile-location,
+.academic-profile .profile-contact :is(a, .email-copy),
+.academic-profile .profile-focus h2,
+.academic-profile .profile-focus li { font-weight: 700; }
+.academic-profile .profile-name h1 { letter-spacing: -.6px; }
+.academic-profile .profile-program,
+.academic-profile .profile-location,
+.academic-profile .profile-focus ul { color: #44564d; }
+/* The former infinite letter wave and hover translation made the sidebar jitter. */
+.academic-profile .type-word,
+.academic-profile .type-letter {
+  animation: none !important;
+  transform: none !important;
+  opacity: 1 !important;
+}
+.academic-profile .type-mask { overflow: visible; }
+.effects-on .academic-profile .avatar:hover,
+.effects-on .academic-profile .profile-contact :is(a, .email-copy):hover,
+.effects-on .academic-profile .profile-contact :is(a, .email-copy):active,
+.effects-on .academic-profile .profile-contact :is(a, .email-copy):hover svg:last-child {
+  transform: none;
+}
+.effects-on .academic-profile .avatar:hover {
+  box-shadow: 0 0 0 1px #b9d9c7, 0 8px 28px #46745b14;
+}

@@ -8,7 +8,7 @@
   let enabled = false;
   let revealObserver;
   const revealed = new WeakSet();
-  const targets = [...document.querySelectorAll('.publication-heading, .publication-media, .publication-details, .education-entry, .experience-entry, .competition-entry')];
+  const targets = [...document.querySelectorAll('.publication-heading, .publication-media, .publication-details, .education-entry, .experience-entry:not(.journey-timeline .experience-entry), .competition-entry')];
   const nav = document.querySelector('.academic-top nav');
   const header = nav.parentElement;
   const indicator = document.createElement('span');
